@@ -4,6 +4,12 @@ export type BodyProps = {
     children?: React.ReactNode;
 }
 
+const jsFiles = [
+    "basecoat.js",
+    "basecoat-defaults.js",
+    "sidebar.js",
+];
+
 export const Body = ({
     children,
 }: BodyProps) => {
@@ -12,9 +18,13 @@ export const Body = ({
             <Sidebar />
             <main>
                 {children}
+                <button type="button" id="toggle-sidebar-btn" className="btn hidden">
+                    Toggle Sidebar
+                </button>
             </main>
-            <script src="/public/js/basecoat.js"></script>
-            <script src="/public/js/basecoat-defaults.js"></script>
+            {jsFiles.map((file) => (
+                <script key={file} src={`/public/js/${file}`}></script>
+            ))}
         </body>
     );
 }

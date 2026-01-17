@@ -6,9 +6,6 @@ export const homeRoute: FastifyPluginCallback = (fastify, _opts) => {
 
         return res.send(<>
             <h1>Home</h1>
-            <button type="button" id="toggle-sidebar-btn" className="btn">
-                Toggle Sidebar
-            </button>
         </>);
     });
 }

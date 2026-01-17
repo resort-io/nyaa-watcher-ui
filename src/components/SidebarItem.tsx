@@ -10,7 +10,7 @@ export const SidebarItem = ({ name, href, icon, external }: SidebarItemProps) =>
         <li>
             <a
                 href={href}
-                className='h-10 p-3 bg-transparent hover:bg-[var(--color-sidebar-accent)] active:bg-[var(--color-sidebar-accent)]'
+                className='h-10 p-3 bg-transparent hover:bg-[var(--color-sidebar-accent)] data-[active=true]:bg-[var(--color-sidebar-accent)]'
                 rel={external ? 'noopener noreferrer' : undefined}
                 target={external ? '_blank' : undefined}
             >

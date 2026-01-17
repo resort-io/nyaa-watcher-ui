@@ -43,20 +43,29 @@ export const Sidebar = () => {
                         <SidebarItem
                             name={'Settings'}
                             href={'/settings'}
-                            icon={<GearIcon />}
+                            icon={<GearIcon/>}
                         />
-                        <SidebarItem
-                            name={'Report a Bug'}
-                            href={'https://github.com/resort-io/nyaa-watcher-ui/issues'}
-                            icon={<BugIcon />}
-                            external={true}
-                        />
-                        <SidebarItem
-                            name={'GitHub'}
-                            href={'https://github.com/resort-io/nyaa-watcher-ui'}
-                            icon={<GithubIcon />}
-                            external={true}
-                        />
+
+                        <div role="group" className="button-group flex w-full mt-2">
+                            <a
+                                className="btn-icon-outline flex-1"
+                                title="GitHub"
+                                href='https://github.com/resort-io/nyaa-watcher-ui'
+                                rel='noopener noreferrer'
+                                target='_blank'
+                            >
+                                <GithubIcon/>
+                            </a>
+                            <a
+                                className="btn-icon-outline flex-1"
+                                title="Report a Bug"
+                                href='https://github.com/resort-io/nyaa-watcher-ui/issues'
+                                rel='noopener noreferrer'
+                                target='_blank'
+                            >
+                                <BugIcon/>
+                            </a>
+                        </div>
                     </SidebarGroup>
                 </section>
             </nav>
