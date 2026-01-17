@@ -2,6 +2,7 @@ import { SidebarItem } from "@/components/SidebarItem";
 import { HomeIcon } from "@/components/icons/home-icon";
 import { BellIcon } from "@/components/icons/bell-icon";
 import { CompassIcon } from "@/components/icons/compass-icon";
+import { BookmarkIcon } from "@/components/icons/bookmark-icon";
 import { GearIcon } from "@/components/icons/gear-icon";
 import { BugIcon } from "@/components/icons/bug-icon";
 import { GithubIcon } from "@/components/icons/github-icon";
@@ -16,23 +17,23 @@ export const Sidebar = () => {
                     <SidebarGroup name={'main items'} hideName={true}>
                         <SidebarItem
                             name={'Home'}
-                            href={'#'}
+                            href={'/'}
                             icon={<HomeIcon />}
                         />
                         <SidebarItem
                             name={'Subscriptions'}
-                            href={'#'}
+                            href={'/subscriptions'}
                             icon={<BellIcon />}
                         />
                         <SidebarItem
                             name={'Explore'}
-                            href={'#'}
+                            href={'/explore'}
                             icon={<CompassIcon />}
                         />
                         <SidebarItem
-                            name={'Subscriptions'}
-                            href={'#'}
-                            icon={<BellIcon />}
+                            name={'Saved'}
+                            href={'/saved'}
+                            icon={<BookmarkIcon />}
                         />
                     </SidebarGroup>
 
@@ -41,18 +42,20 @@ export const Sidebar = () => {
                     <SidebarGroup name={'other items'} hideName={true}>
                         <SidebarItem
                             name={'Settings'}
-                            href={'#'}
+                            href={'/settings'}
                             icon={<GearIcon />}
                         />
                         <SidebarItem
                             name={'Report a Bug'}
-                            href={'#'}
+                            href={'https://github.com/resort-io/nyaa-watcher-ui/issues'}
                             icon={<BugIcon />}
+                            external={true}
                         />
                         <SidebarItem
                             name={'GitHub'}
-                            href={'#'}
+                            href={'https://github.com/resort-io/nyaa-watcher-ui'}
                             icon={<GithubIcon />}
+                            external={true}
                         />
                     </SidebarGroup>
                 </section>

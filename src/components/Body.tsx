@@ -1,3 +1,5 @@
+import { Sidebar } from "@/components/Sidebar.tsx";
+
 export type BodyProps = {
     children?: React.ReactNode;
 }
@@ -7,8 +9,10 @@ export const Body = ({
 }: BodyProps) => {
     return (
         <body>
-            {children}
-
+            <Sidebar />
+            <main>
+                {children}
+            </main>
             <script src="/public/js/basecoat.js"></script>
             <script src="/public/js/basecoat-defaults.js"></script>
         </body>
