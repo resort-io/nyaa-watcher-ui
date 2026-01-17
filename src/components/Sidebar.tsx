@@ -1,8 +1,12 @@
 import { SidebarItem } from "@/components/SidebarItem";
-import { TerminalIcon } from "@/components/icons/terminal-icon";
-import { RobotIcon } from "@/components/icons/robot-icon";
+import { HomeIcon } from "@/components/icons/home-icon";
+import { BellIcon } from "@/components/icons/bell-icon";
+import { CompassIcon } from "@/components/icons/compass-icon";
+import { GearIcon } from "@/components/icons/gear-icon";
+import { BugIcon } from "@/components/icons/bug-icon";
+import { GithubIcon } from "@/components/icons/github-icon";
 import { SidebarGroup } from "@/components/SidebarGroup";
-import {SidebarDivider} from "@/components/SidebarDivider.tsx";
+import { SidebarDivider } from "@/components/SidebarDivider.tsx";
 
 export const Sidebar = () => {
     return (
@@ -13,39 +17,23 @@ export const Sidebar = () => {
                         <SidebarItem
                             name={'Home'}
                             href={'#'}
-                            icon={<TerminalIcon />} // TODO: Update icon
+                            icon={<HomeIcon />}
                         />
                         <SidebarItem
                             name={'Subscriptions'}
                             href={'#'}
-                            icon={<RobotIcon />} // TODO: Update icon
+                            icon={<BellIcon />}
                         />
                         <SidebarItem
                             name={'Explore'}
                             href={'#'}
-                            icon={<RobotIcon />} // TODO: Update icon
+                            icon={<CompassIcon />}
                         />
                         <SidebarItem
                             name={'Subscriptions'}
                             href={'#'}
-                            icon={<RobotIcon />} // TODO: Update icon
+                            icon={<BellIcon />}
                         />
-
-                        {/*<SidebarSubmenu*/}
-                        {/*    name={'Settings'}*/}
-                        {/*    icon={<GearIcon />}*/}
-                        {/*>*/}
-                        {/*    <SidebarItem*/}
-                        {/*        name={'General'}*/}
-                        {/*        href={'#'}*/}
-                        {/*        icon={<TerminalIcon />}*/}
-                        {/*    />*/}
-                        {/*    <SidebarItem*/}
-                        {/*        name={'Team'}*/}
-                        {/*        href={'#'}*/}
-                        {/*        icon={<TerminalIcon />}*/}
-                        {/*    />*/}
-                        {/*</SidebarSubmenu>*/}
                     </SidebarGroup>
 
                     <SidebarDivider />
@@ -54,17 +42,17 @@ export const Sidebar = () => {
                         <SidebarItem
                             name={'Settings'}
                             href={'#'}
-                            icon={<RobotIcon/>} // TODO: Update icon
+                            icon={<GearIcon />}
                         />
                         <SidebarItem
                             name={'Report a Bug'}
                             href={'#'}
-                            icon={<RobotIcon/>} // TODO: Update icon
+                            icon={<BugIcon />}
                         />
                         <SidebarItem
                             name={'GitHub'}
                             href={'#'}
-                            icon={<RobotIcon/>} // TODO: Update icon
+                            icon={<GithubIcon />}
                         />
                     </SidebarGroup>
                 </section>
