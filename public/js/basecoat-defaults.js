@@ -3,9 +3,7 @@ if (!document || typeof document === "undefined") {
 }
 
 /* sidebar */
-
 const toggleSidebarButton = document.querySelector("#toggle-sidebar-btn");
-
 if (toggleSidebarButton) {
     toggleSidebarButton.addEventListener("click", () => {
         document.dispatchEvent(new CustomEvent("basecoat:sidebar"));
@@ -13,7 +11,6 @@ if (toggleSidebarButton) {
 }
 
 /* theme */
-
 (() => {
     try {
         const stored = localStorage.getItem("themeMode");
@@ -46,7 +43,6 @@ if (toggleSidebarButton) {
 })();
 
 const toggleThemeButton = document.querySelector("#toggle-theme-btn");
-
 if (toggleThemeButton) {
     toggleThemeButton.addEventListener("click", () => {
         document.dispatchEvent(new CustomEvent("basecoat:theme"));

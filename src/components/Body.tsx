@@ -7,9 +7,10 @@ export const Body = ({
 }: BodyProps) => {
     return (
         <body>
-            <main>
-                {children}
-            </main>
+            {children}
+
+            <script src="/public/js/basecoat.js"></script>
+            <script src="/public/js/basecoat-defaults.js"></script>
         </body>
     );
 }
