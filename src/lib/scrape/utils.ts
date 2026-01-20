@@ -141,6 +141,22 @@ export const getCategoryTitle = (categoryId: NyaaCategoryId | SukebeiCategoryId 
 
 export const getDomain = (isSukebei?: boolean) => isSukebei ? 'https://sukebei.nyaa.si' : 'https://nyaa.si'; // TODO: Use config
 
+export const getTorrentUserTag = (torrentTitle: string): string => {
+    const match = torrentTitle.match(/^\s*\[([^\]]+)\]/);
+    return match?.[1] ?? '';
+}
+
+export const getTorrentTags = (torrentTitle: string): string[] => {
+    const withoutUserTag = torrentTitle.replace(/^\s*\[([^\]]+)\]/, '');
+    const matches = withoutUserTag.match(/\[([^\]]+)\]/g);
+    if (!matches) return [];
+    return matches.map(match => match.slice(1, -1));
+}
+
+export const removeTagsFromTitle = (torrentTitle: string): string => {
+    return torrentTitle.replace(/\[[^\]]*\]/g, '').replaceAll('  ', ' ').trim();
+}
+
 export const toStr = (value: string | number | undefined) => {
     const result = `${value}`.trim();
     return !result ? undefined : result;

@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import type { CheerioAPI } from "cheerio";
 import { fetchHtml, getCategoryTitle, getDomain, toStr, toNum } from "./utils"
-import type { ScrapeSearchOptions, ScrapedSearchTorrent } from "@/types/scraping";
+import type { ScrapeSearchPageOptions, ScrapedSearchPageTorrent } from "@/types/scraping";
 import type {
     NyaaSubcategoryTitle,
     SukebeiSubcategoryTitle,
@@ -9,7 +9,7 @@ import type {
     SukebeiSubcategoryId, NyaaTorrentSize,
 } from "@/types/nyaa";
 
-const createFeedUrl = (options?: Partial<ScrapeSearchOptions>): string => {
+const createFeedUrl = (options?: Partial<ScrapeSearchPageOptions>): string => {
     const user = options?.user ? `/user/${options.user.trim()}` : '';
     const category = `c=${options?.category ?? '0_0'}`;
     const filter = `&f=${options?.filter ?? 0}`;
@@ -21,7 +21,7 @@ const createFeedUrl = (options?: Partial<ScrapeSearchOptions>): string => {
     return getDomain(options?.isSukebei ?? false).concat(user, '?', category, filter, sort, order, page, query)
 }
 
-const validateSearchTorrent = (data: Partial<ScrapedSearchTorrent>) => {
+const validateSearchTorrent = (data: Partial<ScrapedSearchPageTorrent>) => {
     if (
         !data.categoryId
         || !data.id
@@ -32,24 +32,24 @@ const validateSearchTorrent = (data: Partial<ScrapedSearchTorrent>) => {
     ) {
         return null;
     }
-    return data as ScrapedSearchTorrent;
+    return data as ScrapedSearchPageTorrent;
 }
 
 /** @throws Error When the fetch fails. */
-export const scrapeSearchPage = async (options?: ScrapeSearchOptions) => {
+export const scrapeSearchPage = async (options?: ScrapeSearchPageOptions) => {
     const url = createFeedUrl(options);
     const html = await fetchHtml(url);
     const $: CheerioAPI = cheerio.load(html);
 
     const rows = $(`table.table.table-bordered.table-hover.table-striped.torrent-list > tbody`).children();
-    const results: ScrapedSearchTorrent[] = [];
+    const results: ScrapedSearchPageTorrent[] = [];
 
     rows.each((_index, trElement) => {
         const children = $(trElement).children();
         const categoryId = children.eq(0).find('a').attr('href')?.trim().replace('/?c=', '') as NyaaSubcategoryId | SukebeiSubcategoryId;
         const link = children.eq(2).children().first().attr('href')?.trim();
 
-        const data: Partial<ScrapedSearchTorrent> = {
+        const data: Partial<ScrapedSearchPageTorrent> = {
             category: getCategoryTitle(categoryId, options?.isSukebei) as NyaaSubcategoryTitle | SukebeiSubcategoryTitle,
             categoryId,
             comments: toNum(children.eq(1).find('a.comments').text().trim()) ?? 0,

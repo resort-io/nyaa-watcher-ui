@@ -7,7 +7,7 @@ describe('scrapeSearchPage', () => {
         const result = await scrapeSearchPage({});
 
         console.log(`result length: ${result.length}`);
-        console.log(`result[0]: ${result.length}`);
+        console.log(result[0]);
         expect(result.length).toEqual(75);
     });
 });

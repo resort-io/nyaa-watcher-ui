@@ -5,11 +5,12 @@ import type {
     NyaaSubcategoryId,
     SukebeiSubcategoryId,
     NyaaSubcategoryTitle,
-    SukebeiSubcategoryTitle, NyaaTorrentSize,
+    SukebeiSubcategoryTitle,
+    NyaaTorrentSize,
 } from "@/types/nyaa";
 
 
-type ScrapeSearchOptionsBase = {
+type ScrapeSearchPageOptionsBase = {
     filter?: NyaaFilterId;
     order?: 'asc' | 'desc';
     page?: number;
@@ -20,19 +21,20 @@ type ScrapeSearchOptionsBase = {
     isSukebei?: boolean;
 }
 
-export type NyaaScrapeSearchOptions = Omit<ScrapeSearchOptionsBase, 'category' | 'isSukebei'> & {
+export type NyaaScrapeSearchPageOptions = Omit<ScrapeSearchPageOptionsBase, 'category' | 'isSukebei'> & {
     category?: NyaaCategoryId;
     isSukebei?: false;
 }
 
-export type SukebeiScrapeSearchOptions = Omit<ScrapeSearchOptionsBase, 'category' | 'isSukebei'> & {
+export type SukebeiScrapeSearchPageOptions = Omit<ScrapeSearchPageOptionsBase, 'category' | 'isSukebei'> & {
     category?: SukebeiCategoryId;
     isSukebei: true;
 }
 
-export type ScrapeSearchOptions = NyaaScrapeSearchOptions | SukebeiScrapeSearchOptions;
+export type ScrapeSearchPageOptions = NyaaScrapeSearchPageOptions | SukebeiScrapeSearchPageOptions;
 
-export type ScrapedSearchTorrent = {
+// TODO: Add 'subcategory' field
+export type ScrapedSearchPageTorrent = {
     category: NyaaSubcategoryTitle | SukebeiSubcategoryTitle;
     categoryId: NyaaSubcategoryId | SukebeiSubcategoryId;
     comments: number;
@@ -44,7 +46,6 @@ export type ScrapedSearchTorrent = {
     link?: string | null;
     magnet?: string | null;
     published: string;
-    // size: string;
     size: NyaaTorrentSize;
     seeders: number;
     timestamp: number;
@@ -52,43 +53,44 @@ export type ScrapedSearchTorrent = {
 }
 
 
-export type NyaaScrapeTorrentOptions = {
+export type NyaaScrapeTorrentPageOptions = {
     id: number;
     isSukebei?: false;
 }
 
-export type SukebeiScrapeTorrentOptions = {
+export type SukebeiScrapeTorrentPageOptions = {
     id: number;
     isSukebei: true;
 }
 
-export type ScrapeTorrentOptions = NyaaScrapeTorrentOptions | SukebeiScrapeTorrentOptions;
+export type ScrapeTorrentPageOptions = NyaaScrapeTorrentPageOptions | SukebeiScrapeTorrentPageOptions;
 
-export type ScrapedTorrentFile = {
+export type ScrapedTorrentPageFile = {
     name: string;
     size: NyaaTorrentSize;
 }
 
-export type ScrapedTorrentFolder = {
+export type ScrapedTorrentPageFolder = {
     name: string;
-    files: (ScrapedTorrentFile|ScrapedTorrentFolder)[];
+    files: (ScrapedTorrentPageFile|ScrapedTorrentPageFolder)[];
 }
 
-export type ScrapedTorrentComment = {
+export type ScrapedTorrentPageComment = {
     content: string;
     published: string;
     timestamp: number;
     user: string;
 }
 
-export type ScrapedTorrent = {
+// TODO: Add 'subcategory' field
+export type ScrapedTorrentPage = {
     category: NyaaSubcategoryTitle | SukebeiSubcategoryTitle;
     categoryId: NyaaSubcategoryId | SukebeiSubcategoryId;
-    comments: ScrapedTorrentComment[];
+    comments: ScrapedTorrentPageComment[];
     description?: string;
     /** Defaults to `-1` if not available. */
     downloads: number;
-    files: (ScrapedTorrentFile|ScrapedTorrentFolder)[];
+    files: (ScrapedTorrentPageFile|ScrapedTorrentPageFolder)[];
     hash: string;
     information?: string;
     isRemake: boolean;

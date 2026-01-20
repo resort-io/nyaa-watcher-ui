@@ -2,11 +2,11 @@ import * as cheerio from 'cheerio';
 import type { AcceptedElems, CheerioAPI } from "cheerio";
 import { fetchHtml, getCategoryId, getDomain, hasClass, toStr, toNum } from "./utils"
 import type {
-    ScrapedTorrentComment,
-    ScrapedTorrent,
-    ScrapedTorrentFile,
-    ScrapedTorrentFolder,
-    ScrapeTorrentOptions,
+    ScrapedTorrentPageComment,
+    ScrapedTorrentPage,
+    ScrapedTorrentPageFile,
+    ScrapedTorrentPageFolder,
+    ScrapeTorrentPageOptions,
 } from "@/types/scraping";
 import type {
     NyaaSubcategoryId,
@@ -15,7 +15,7 @@ import type {
     SukebeiSubcategoryTitle
 } from "@/types/nyaa.ts";
 
-const validatePage = (data: Partial<ScrapedTorrent>) => {
+const validatePage = (data: Partial<ScrapedTorrentPage>) => {
     if (
         !data.category
         || !data.hash
@@ -27,11 +27,11 @@ const validatePage = (data: Partial<ScrapedTorrent>) => {
     ) {
         return null;
     }
-    return data as ScrapedTorrent;
+    return data as ScrapedTorrentPage;
 }
 
-const getTorrentPageFiles = ($: CheerioAPI, element?: AcceptedElems<any>): (ScrapedTorrentFile|ScrapedTorrentFolder)[] => {
-    let filelist: (ScrapedTorrentFile|ScrapedTorrentFolder)[] = [];
+const getTorrentPageFiles = ($: CheerioAPI, element?: AcceptedElems<any>): (ScrapedTorrentPageFile|ScrapedTorrentPageFolder)[] => {
+    let filelist: (ScrapedTorrentPageFile|ScrapedTorrentPageFolder)[] = [];
     const ulElement = element ? $(element).children().last() : $('div.torrent-file-list.panel-body > ul').first();
 
     if (ulElement.children().length > 0) {
@@ -57,8 +57,8 @@ const getTorrentPageFiles = ($: CheerioAPI, element?: AcceptedElems<any>): (Scra
     return filelist;
 }
 
-const getTorrentPageComments = ($: CheerioAPI): ScrapedTorrentComment[] => {
-    let comments: ScrapedTorrentComment[] = [];
+const getTorrentPageComments = ($: CheerioAPI): ScrapedTorrentPageComment[] => {
+    let comments: ScrapedTorrentPageComment[] = [];
     const commentsEl = $('#collapse-comments').children();
 
     if (commentsEl.children().length > 0) {
@@ -77,7 +77,7 @@ const getTorrentPageComments = ($: CheerioAPI): ScrapedTorrentComment[] => {
     return comments;
 }
 
-export const scrapeTorrentPage = async (options: ScrapeTorrentOptions) => {
+export const scrapeTorrentPage = async (options: ScrapeTorrentPageOptions) => {
     const url = getDomain(options.isSukebei ?? false) + `/view/${options.id}`;
     const html = await fetchHtml(url);
     const $: CheerioAPI = cheerio.load(html);
@@ -94,7 +94,7 @@ export const scrapeTorrentPage = async (options: ScrapeTorrentOptions) => {
     const headerElement = $('body > div.container').first().children().first();
     const information = toStr(infoElementThree.first().text());
 
-    const data: Partial<ScrapedTorrent> = {
+    const data: Partial<ScrapedTorrentPage> = {
         category,
         categoryId: getCategoryId(category, options.isSukebei ?? false) as NyaaSubcategoryId | SukebeiSubcategoryId,
         comments: getTorrentPageComments($),
