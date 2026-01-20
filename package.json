@@ -8,13 +8,15 @@
     "copy:htmx": "bun -e \"await Bun.write('public/js/htmx.js', Bun.file('node_modules/htmx.org/dist/htmx.min.js'))\"",
     "build:css": "bunx @tailwindcss/cli -i ./globals.css -o ./public/css/styles.css --minify",
     "build": "bun run copy:basecoat && bun run copy:htmx && bun run build:css",
-    "start": "bun run build && bun src/server.ts"
+    "start": "bun run build && bun src/server.ts",
+    "test": "bun test"
   },
   "dependencies": {
     "@fastify/autoload": "^6.3.1",
     "@fastify/static": "^8.3.0",
     "@jhxdev/fastify": "^0.1.2",
     "basecoat-css": "^0.3.10",
+    "cheerio": "^1.1.2",
     "fastify": "^5.7.1",
     "fastify-plugin": "^5.1.0",
     "htmx.org": "^2.0.8",

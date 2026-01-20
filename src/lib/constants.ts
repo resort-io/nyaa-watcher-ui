@@ -1,0 +1,45 @@
+export const NYAA_FILTERS = [
+    { id: 0, title: 'None' },
+    { id: 1, title: 'No Remakes' },
+    { id: 2, title: 'Trusted Only' },
+] as const;
+
+export const NYAA_CATEGORIES = [
+    { id: '0_0', title: 'All' },
+    { id: '1_0', title: 'Anime' },
+    { id: '1_1', title: 'Anime - Anime Music Video' },
+    { id: '1_2', title: 'Anime - English-Translated' },
+    { id: '1_3', title: 'Anime - Non-English-Translated' },
+    { id: '1_4', title: 'Anime - Raw' },
+    { id: '2_0', title: 'Audio' },
+    { id: '2_1', title: 'Audio - Lossy' },
+    { id: '2_2', title: 'Audio - Lossless' },
+    { id: '3_0', title: 'Manga' },
+    { id: '3_1', title: 'Manga - English-Translated' },
+    { id: '3_2', title: 'Manga - Non-English-Translated' },
+    { id: '3_3', title: 'Manga - Raw' },
+    { id: '4_0', title: 'Live Action' },
+    { id: '4_1', title: 'Live Action - English-Translated' },
+    { id: '4_2', title: 'Live Action - Non-English-Translated' },
+    { id: '4_3', title: 'Live Action - Idol/Promotional Video' },
+    { id: '4_4', title: 'Live Action - Raw' },
+    { id: '5_0', title: 'Pictures' },
+    { id: '5_1', title: 'Pictures - Graphics' },
+    { id: '5_2', title: 'Pictures - Photos' },
+    { id: '6_0', title: 'Software' },
+    { id: '6_1', title: 'Software - Applications' },
+    { id: '6_2', title: 'Software - Games' },
+] as const;
+
+export const SUKEBEI_CATEGORIES = [
+    { id: '0_0', title: 'All' },
+    { id: '1_0', title: 'Art' },
+    { id: '1_1', title: 'Art - Anime' },
+    { id: '1_2', title: 'Art - Doujinshi' },
+    { id: '1_3', title: 'Art - Games' },
+    { id: '1_4', title: 'Art - Manga' },
+    { id: '1_5', title: 'Art - Pictures' },
+    { id: '2_0', title: 'Real Life' },
+    { id: '2_1', title: 'Real Life - Photobooks and Pictures' },
+    { id: '2_2', title: 'Real Life - Videos' },
+] as const;
