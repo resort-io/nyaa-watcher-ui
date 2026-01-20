@@ -10,13 +10,13 @@ const jsFiles = [
     "sidebar.js",
 ];
 
-export const Body = ({
+export const DefaultBody = ({
     children,
 }: BodyProps) => {
     return (
         <body>
             <Sidebar />
-            <main>
+            <main className='p-8 flex-1 overflow-auto'>
                 {children}
                 <button type="button" id="toggle-sidebar-btn" className="btn hidden">
                     Toggle Sidebar

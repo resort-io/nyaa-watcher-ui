@@ -2,8 +2,8 @@ import fp from "fastify-plugin";
 import { createElement, isValidElement } from "react";
 import { renderToString } from "react-dom/server";
 import type { FastifyReply } from "fastify";
-import { Head } from "@/components/Head";
-import { Body } from "@/components/Body";
+import { DefaultHead } from "@/components/DefaultHead";
+import { DefaultBody } from "@/components/DefaultBody";
 
 const defaultPageTitle = 'Nyaa Watcher';
 
@@ -44,8 +44,8 @@ export default fp<PartialPagePluginOptions>(async (fastify, {
                     {
                         lang: "en",
                     },
-                    Head({ title: res.pageTitle ?? defaultTitle }),
-                    Body({ children: payload })
+                    DefaultHead({ title: res.pageTitle ?? defaultTitle }),
+                    DefaultBody({ children: payload })
                 ));
             }
             return payload;

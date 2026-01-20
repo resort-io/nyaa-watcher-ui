@@ -12,7 +12,7 @@ export const SidebarGroup = ({
     const id = name.toLowerCase().replace(/\s+/g, '-');
 
     return (
-        <div role="group" aria-labelledby={`${id}-sidebar-group`}>
+        <div role="group" aria-labelledby={`${id}-sidebar-group`} className='pl-0 pr-0 pt-1 pb-1'>
             <h3
                 id={`${id}-sidebar-group`}
                 className={hideName ? 'hidden' : ''}

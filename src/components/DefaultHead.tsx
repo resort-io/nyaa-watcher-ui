@@ -3,7 +3,7 @@ export type HeadProps = {
     children?: React.ReactNode;
 }
 
-export const Head = ({
+export const DefaultHead = ({
     title,
     children,
 }: HeadProps) => {
