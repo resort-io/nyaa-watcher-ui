@@ -1,6 +1,9 @@
 import * as cheerio from 'cheerio';
 import type { AcceptedElems, CheerioAPI } from "cheerio";
-import { fetchHtml, getCategoryId, getDomain, hasClass, toStr, toNum } from "./utils"
+import {
+    fetchHtml, getCategoryId, getDomain, hasClass, toStr, toNum, getTorrentTags, getTorrentUserTag,
+    removeTagsFromTitle
+} from "./utils"
 import type {
     ScrapedTorrentPageComment,
     ScrapedTorrentPage,
@@ -93,6 +96,7 @@ export const scrapeTorrentPage = async (options: ScrapeTorrentPageOptions) => {
     const description = toStr($('#torrent-description').text());
     const headerElement = $('body > div.container').first().children().first();
     const information = toStr(infoElementThree.first().text());
+    const title = toStr($('h3.panel-title').first().text());
 
     const data: Partial<ScrapedTorrentPage> = {
         category,
@@ -109,12 +113,15 @@ export const scrapeTorrentPage = async (options: ScrapeTorrentPageOptions) => {
         link: downloadAttr && downloadElements.first().text().includes('Download') ? getDomain(options.isSukebei) + downloadAttr : undefined,
         leechers: toNum(infoElementThree.last().text().trim()) ?? -1,
         magnet: downloadElements.last().text().includes('Magnet') ? toStr(downloadElements.last().attr('href')) : undefined,
+        originalTitle: title,
         published: toStr(infoElementOne.last().text()),
         seeders: toNum(infoElementTwo.last().text().trim()) ?? -1,
         size: toStr(infoElementFour.first().text()) as NyaaTorrentSize,
+        tags: getTorrentTags(title),
         timestamp: toNum(infoElementOne.last().attr('data-timestamp')?.trim()) ?? undefined,
-        title: toStr($('h3.panel-title').first().text()),
+        title: removeTagsFromTitle(title),
         user: toStr(infoElementTwo.first().text()),
+        userTag: getTorrentUserTag(title),
     }
 
     return validatePage(data);

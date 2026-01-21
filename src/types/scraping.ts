@@ -45,11 +45,15 @@ export type ScrapedSearchPageTorrent = {
     leechers: number;
     link?: string | null;
     magnet?: string | null;
+    /** Original title with the tags. */
+    originalTitle: string;
     published: string;
     size: NyaaTorrentSize;
     seeders: number;
+    tags: string[];
     timestamp: number;
     title: string;
+    userTag?: string;
 }
 
 
@@ -88,7 +92,6 @@ export type ScrapedTorrentPage = {
     categoryId: NyaaSubcategoryId | SukebeiSubcategoryId;
     comments: ScrapedTorrentPageComment[];
     description?: string;
-    /** Defaults to `-1` if not available. */
     downloads: number;
     files: (ScrapedTorrentPageFile|ScrapedTorrentPageFolder)[];
     hash: string;
@@ -97,14 +100,16 @@ export type ScrapedTorrentPage = {
     isTrusted: boolean;
     isTrustedUser: boolean;
     link?: string;
-    /** Defaults to `-1` if not available. */
     leechers: number;
     magnet?: string;
+    /** Original title with the tags. */
+    originalTitle: string;
     published: string;
-    /** Defaults to `-1` if not available. */
     seeders: number;
     size: NyaaTorrentSize;
+    tags: string[];
     timestamp: number;
     title: string;
     user: string;
+    userTag?: string;
 }

@@ -1,6 +1,15 @@
 import * as cheerio from 'cheerio';
 import type { CheerioAPI } from "cheerio";
-import { fetchHtml, getCategoryTitle, getDomain, toStr, toNum } from "./utils"
+import {
+    fetchHtml,
+    getCategoryTitle,
+    getDomain,
+    toStr,
+    toNum,
+    getTorrentUserTag,
+    removeTagsFromTitle,
+    getTorrentTags
+} from "./utils"
 import type { ScrapeSearchPageOptions, ScrapedSearchPageTorrent } from "@/types/scraping";
 import type {
     NyaaSubcategoryTitle,
@@ -48,6 +57,7 @@ export const scrapeSearchPage = async (options?: ScrapeSearchPageOptions) => {
         const children = $(trElement).children();
         const categoryId = children.eq(0).find('a').attr('href')?.trim().replace('/?c=', '') as NyaaSubcategoryId | SukebeiSubcategoryId;
         const link = children.eq(2).children().first().attr('href')?.trim();
+        const title = toStr(children.eq(1).children().last().text().trim());
 
         const data: Partial<ScrapedSearchPageTorrent> = {
             category: getCategoryTitle(categoryId, options?.isSukebei) as NyaaSubcategoryTitle | SukebeiSubcategoryTitle,
@@ -60,11 +70,14 @@ export const scrapeSearchPage = async (options?: ScrapeSearchPageOptions) => {
             leechers: toNum(children.eq(6).text().trim()) ?? -1,
             link: link ? getDomain(options?.isSukebei ?? false) + link : undefined,
             magnet: toStr(children.eq(2).children().last().attr('href')?.trim()) ?? undefined,
+            originalTitle: title,
             published: toStr(children.eq(4).text().trim()),
             size: toStr(children.eq(3).text().trim()) as NyaaTorrentSize,
             seeders: toNum(children.eq(5).text().trim()) ?? -1,
+            tags: getTorrentTags(title),
             timestamp: toNum(children.eq(4).attr('data-timestamp')?.trim() || '0') ?? -1,
-            title: toStr(children.eq(1).children().last().text().trim()),
+            title: removeTagsFromTitle(title),
+            userTag: getTorrentUserTag(title),
         }
 
         const validated = validateSearchTorrent(data);

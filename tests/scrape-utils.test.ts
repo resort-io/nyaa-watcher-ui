@@ -11,7 +11,7 @@ describe('scrape utils: getTorrentUserTag', () => {
     it('many torrent tags', async () => {
         const title = "TEST TITLE - S01E01 [1080p][HEVC x265 10bit][Multi-Subs] (Weekly)";
         const result = getTorrentUserTag(title);
-        expect(result).toEqual("");
+        expect(result).toEqual(undefined);
     });
 
     it('one user tag', async () => {
@@ -23,7 +23,7 @@ describe('scrape utils: getTorrentUserTag', () => {
     it('one torrent tag', async () => {
         const title = "TEST TITLE - S01E01 [1080p] (Weekly)";
         const result = getTorrentUserTag(title);
-        expect(result).toEqual("");
+        expect(result).toEqual(undefined);
     });
 });
 
