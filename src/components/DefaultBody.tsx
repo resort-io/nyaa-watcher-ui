@@ -7,6 +7,7 @@ export type BodyProps = {
 const jsFiles = [
     "basecoat.js",
     "basecoat-defaults.js",
+    "torrent-item.js",
     "sidebar.js",
 ];
 

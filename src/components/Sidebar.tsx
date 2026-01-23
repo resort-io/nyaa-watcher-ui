@@ -2,7 +2,7 @@ import { SidebarItem } from "@/components/SidebarItem";
 import { HomeIcon } from "@/components/icons/home-icon";
 import { BellIcon } from "@/components/icons/bell-icon";
 import { CompassIcon } from "@/components/icons/compass-icon";
-import { BookmarkIcon } from "@/components/icons/bookmark-icon";
+import { BookmarkIcon } from "@/components/icons/BookmarkIcon.tsx";
 import { GearIcon } from "@/components/icons/gear-icon";
 import { BugIcon } from "@/components/icons/bug-icon";
 import { GithubIcon } from "@/components/icons/github-icon";

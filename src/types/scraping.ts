@@ -43,8 +43,8 @@ export type ScrapedSearchPageTorrent = {
     isRemake: boolean;
     isTrusted: boolean;
     leechers: number;
-    link?: string | null;
-    magnet?: string | null;
+    downloadLink?: string | null;
+    magnetLink?: string | null;
     /** Original title with the tags. */
     originalTitle: string;
     published: string;

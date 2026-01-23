@@ -6,8 +6,8 @@ describe('scrapeSearchPage', () => {
     it('default', async () => {
         const result = await scrapeSearchPage({});
 
-        console.log(`result length: ${result.length}`);
-        console.log(result[0]);
+        // console.log(`result length: ${result.length}`);
+        // console.log(result[0]);
         expect(result.length).toEqual(75);
     });
 });
@@ -15,11 +15,11 @@ describe('scrapeSearchPage', () => {
 describe('scrapeTorrentPage', () => {
     it('default', async () => {
         const result = await scrapeTorrentPage({
-            id: 2058805,
+            id: 2056758,
         });
 
         console.log('result:', result);
-        console.log('result files:', JSON.stringify(result?.files));
+        // console.log('result files:', JSON.stringify(result?.files));
 
         // expect(result).toEqual();
     });

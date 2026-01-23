@@ -56,7 +56,7 @@ export const scrapeSearchPage = async (options?: ScrapeSearchPageOptions) => {
     rows.each((_index, trElement) => {
         const children = $(trElement).children();
         const categoryId = children.eq(0).find('a').attr('href')?.trim().replace('/?c=', '') as NyaaSubcategoryId | SukebeiSubcategoryId;
-        const link = children.eq(2).children().first().attr('href')?.trim();
+        const downloadLink = children.eq(2).children().first().attr('href')?.trim();
         const title = toStr(children.eq(1).children().last().text().trim());
 
         const data: Partial<ScrapedSearchPageTorrent> = {
@@ -68,8 +68,8 @@ export const scrapeSearchPage = async (options?: ScrapeSearchPageOptions) => {
             isRemake: $(trElement).hasClass('danger') ?? false,
             isTrusted: $(trElement).hasClass('success') ?? false,
             leechers: toNum(children.eq(6).text().trim()) ?? -1,
-            link: link ? getDomain(options?.isSukebei ?? false) + link : undefined,
-            magnet: toStr(children.eq(2).children().last().attr('href')?.trim()) ?? undefined,
+            downloadLink: downloadLink ? getDomain(options?.isSukebei ?? false) + downloadLink : undefined,
+            magnetLink: toStr(children.eq(2).children().last().attr('href')?.trim()) ?? undefined,
             originalTitle: title,
             published: toStr(children.eq(4).text().trim()),
             size: toStr(children.eq(3).text().trim()) as NyaaTorrentSize,
