@@ -6,10 +6,9 @@ export const homeRoute: FastifyPluginCallback = (fastify, _opts) => {
         res.setTitle("Home - Nyaa Watcher");
 
         return res.send(<>
-            <PageHeader
-                title='Home'
-                subtitle='Welcome to Nyaa Watcher! Browse the latest torrents below.'
-            />
+            <PageHeader>
+                Home
+            </PageHeader>
         </>);
     });
 }

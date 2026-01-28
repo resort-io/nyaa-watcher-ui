@@ -6,10 +6,9 @@ export const savedRoute: FastifyPluginCallback = (fastify, _opts) => {
         res.setTitle("Saved - Nyaa Watcher");
 
         return res.send(<>
-            <PageHeader
-                title='Saved'
-                subtitle='View and manage your saved torrents here.'
-            />
+            <PageHeader>
+                Saved
+            </PageHeader>
         </>);
     });
 }

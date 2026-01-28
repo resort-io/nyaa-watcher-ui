@@ -17,7 +17,7 @@ export const DefaultBody = ({
     return (
         <body>
             <Sidebar />
-            <main className='p-8 flex-1 overflow-auto'>
+            <main className='px-8 py-6 flex-1 overflow-auto'>
                 {children}
                 <button type="button" id="toggle-sidebar-btn" className="btn hidden">
                     Toggle Sidebar

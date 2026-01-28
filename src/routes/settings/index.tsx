@@ -6,10 +6,9 @@ export const settingsRoute: FastifyPluginCallback = (fastify, _opts) => {
         res.setTitle("Settings - Nyaa Watcher");
 
         return res.send(<>
-            <PageHeader
-                title='Settings'
-                subtitle='Manage your application settings and preferences here.'
-            />
+            <PageHeader>
+                Settings
+            </PageHeader>
         </>);
     });
 }

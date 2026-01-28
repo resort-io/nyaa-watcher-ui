@@ -7,7 +7,7 @@ export type TrustedBadgeProps = {
 export const TrustedBadge = ({ href, ...props }: TrustedBadgeProps) => {
     return (
         <a href={href ?? '#'} {...props} className={`torrent-item-trusted-badge`}>
-            <span  className={`text-green-500 hover:text-green-400 badge-outline border border-green-500 hover:border-green-400 bg-green-900 hover:bg-green-800 transition-none`}>
+            <span className={`rounded gap-0.5 pl-1.5 pr-1.5 text-green-500 hover:text-green-400 badge-outline border border-green-500 hover:border-green-400 bg-green-900 hover:bg-green-800 transition-none`}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

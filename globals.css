@@ -7,3 +7,50 @@
 * {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+/* Rotated external link symbol in download button tooltip */
+/* The ::after overlays a rotated ⎋ symbol precisely over the placeholder space in ::before */
+span:has(> .torrent-item-download-btn)[data-tooltip] {
+    /* Tooltip content with em-space placeholder where the rotated symbol will appear */
+    &::before {
+        --tw-content: "\2003" attr(data-tooltip) !important; /* \2003 is em space placeholder */
+    }
+
+    /* Rotated symbol overlay - matches ::before positioning exactly */
+    &::after {
+        content: "⎋";
+        pointer-events: none;
+        visibility: hidden;
+        position: absolute;
+        z-index: 61;
+        bottom: 100%;
+        /* Anchor to the same position as the tooltip ::before */
+        left: 50%;
+        /* Include horizontal offset in translate to prevent sliding */
+        --tw-translate-x: calc(-50% - 4.1rem + 2px);
+        --tw-translate-y: calc(var(--spacing) * 2);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+        margin-bottom: calc(var(--spacing) * 1.5 + 3px);
+        padding-top: calc(var(--spacing) * 1.5);
+        /* Text styling to match tooltip */
+        font-size: var(--text-xs);
+        line-height: var(--tw-leading, var(--text-xs--line-height));
+        color: var(--color-background);
+        opacity: 0;
+        /* Rotation applied */
+        display: inline-block;
+        transform: rotate(90deg);
+        /* No scale transition - only animate visibility, opacity, and vertical translate */
+        transition-property: visibility, opacity, translate;
+        transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+        transition-duration: var(--tw-duration, var(--default-transition-duration));
+    }
+
+    &:hover::after {
+        visibility: visible;
+        --tw-translate-y: 0;
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+        opacity: 1;
+    }
+}
+

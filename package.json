@@ -19,7 +19,7 @@
     "cheerio": "^1.1.2",
     "fastify": "^5.7.1",
     "fastify-plugin": "^5.1.0",
-    "htmx.org": "^2.0.8",
+    "htmx.org": "2.0.8",
     "octokit": "^5.0.5",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"

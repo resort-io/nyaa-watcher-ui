@@ -7,7 +7,7 @@ export type RemakeBadgeProps = {
 export const RemakeBadge = ({ href, ...props }: RemakeBadgeProps) => {
     return (
         <a href={href ?? '#'} {...props} className={`torrent-item-remake-badge`}>
-            <span className={`text-yellow-500 badge-outline border border-yellow-500 hover:border-yellow-400 bg-yellow-900 hover:bg-yellow-800 transition-none`}>
+            <span className={`rounded gap-0.5 pl-1.5 pr-1.5 text-yellow-500 badge-outline border border-yellow-500 hover:border-yellow-400 bg-yellow-900 hover:bg-yellow-800 transition-none`}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

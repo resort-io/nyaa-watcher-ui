@@ -6,20 +6,20 @@ export type ColorBadgeProps = {
     href?: string;
 } & ComponentPropsWithoutRef<'span'>;
 
-export const ColorBadge = ({ color, children, href, ...props }: ColorBadgeProps) => {
-    const className = `badge-secondary border border-${color}-500 hover:border-${color}-400 bg-${color}-900 hover:bg-${color}-800`;
+export const ColorBadge = ({ className, color, children, href, ...props }: ColorBadgeProps) => {
+    const classes = `badge-secondary border border-${color}-500 hover:border-${color}-400 bg-${color}-900 hover:bg-${color}-800 ${className}`;
 
     if (href) {
         return (
             <a href={href} {...props}>
-                <span className={className}>
+                <span className={classes}>
                     {children}
                 </span>
             </a>
         );
     }
     return (
-        <span className={`${className} cursor-default`} {...props}>
+        <span className={`${classes} cursor-default`} {...props}>
             {children}
         </span>
     );

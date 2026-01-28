@@ -1,3 +1,4 @@
+import type { ComponentPropsWithoutRef } from "react";
 import type { ScrapedSearchPageTorrent } from "@/types/scraping.ts";
 import { RemakeBadge } from "@/components/badges/RemakeBadge.tsx";
 import { TrustedBadge } from "@/components/badges/TrustedBadge.tsx";
@@ -15,13 +16,16 @@ import { BookmarkIcon } from "@/components/icons/BookmarkIcon.tsx";
 import { CirclePlusIcon } from "@/components/icons/CirclePlusIcon.tsx";
 import { TorrentItemButton } from "@/components/TorrentItemButton.tsx";
 
-export type TorrentItemProps = ScrapedSearchPageTorrent & {}
+export type TorrentItemProps = {
+    torrent: ScrapedSearchPageTorrent;
+} & ComponentPropsWithoutRef<'article'>;
 
-export const TorrentItem = (props: TorrentItemProps) => {
+export const TorrentItem = ({ torrent, ...props }: TorrentItemProps) => {
     return (
         <article
             className="group/item flex items-center border-2 text-sm rounded-md border-border p-4 gap-4 bg-neutral-900 hover:border-neutral-700 flex-wrap outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
-            data-torrent-id={props.id}
+            data-torrent-id={torrent.id}
+            {...props}
         >
             <img
                 src="https://github.com/hunvreus.png"
@@ -33,17 +37,17 @@ export const TorrentItem = (props: TorrentItemProps) => {
                 {/* Title */}
                 <div className="flex items-center gap-2">
                     <h3
-                        className="flex w-fit items-center gap-2 text-sm leading-snug font-medium hover:underline hover:text-sky-400"
-                        data-alt-title={props.originalTitle}
+                        className="flex w-fit items-center gap-2 text-sm leading-snug font-medium hover:underline hover:text-sky-400 tracking-tight"
+                        data-alt-title={torrent.originalTitle}
                     >
                         <a href="#">
-                            {props.title}
+                            {torrent.title}
                         </a>
                     </h3>
-                    {props.isTrusted && (
+                    {torrent.isTrusted && (
                         <TrustedBadge data-tooltip="Uploaded by a Trusted User" />
                     )}
-                    {props.isRemake && (
+                    {torrent.isRemake && (
                         <RemakeBadge data-tooltip="Torrent is a Remake or Reupload" />
                     )}
                 </div>
@@ -56,7 +60,7 @@ export const TorrentItem = (props: TorrentItemProps) => {
                         <p className="inline-flex items-center gap-1">
                             <ServerIcon className="h-3 w-3 shrink-0" />
                             <span className="torrent-item-size text-white">
-                                {props.size}
+                                {torrent.size}
                             </span>
                         </p>
 
@@ -64,39 +68,40 @@ export const TorrentItem = (props: TorrentItemProps) => {
                             <CalendarIcon className="h-3 w-3 shrink-0 mb-px"/>
                             <span
                                 className={`torrent-item-published-date`}
-                                data-timestamp={props.timestamp}
-                                data-published={props.published}
+                                data-timestamp={torrent.timestamp}
+                                data-published={torrent.published}
                             >
-                                {props.published}
+                                {/* TODO: Convert to local timezone */}
+                                {torrent.published}
                             </span>
                         </p>
 
                         <p data-tooltip="Seeders" className="inline-flex items-center gap-0.5 text-green-500">
                             <ArrowUpIcon className="h-3 w-3 shrink-0 mb-px"/>
                             <span className={`torrent-item-seeders-num`}>
-                                {props.seeders}
+                                {torrent.seeders}
                             </span>
                         </p>
 
                         <p data-tooltip="Leechers" className="inline-flex items-center gap-0.5 text-red-500">
                             <ArrowDownIcon className="h-3 w-3 shrink-0 mb-px"/>
                             <span className={`torrent-item-leechers-num`}>
-                                {props.leechers}
+                                {torrent.leechers}
                             </span>
                         </p>
 
                         <p data-tooltip="Downloads" className="inline-flex items-center gap-0.5">
                             <DownloadIcon className="h-3 w-3 shrink-0"/>
                             <span className={`torrent-item-downloads-num`}>
-                                {props.downloads}
+                                {torrent.downloads}
                             </span>
                         </p>
 
-                        {props.comments > 0 && (
+                        {torrent.comments > 0 && (
                             <p data-tooltip="Comments" className="inline-flex items-center gap-1">
                                 <CommentIcon className="h-3 w-3 shrink-0"/>
                                 <span className={`torrent-item-comments-num`}>
-                                    {props.comments}
+                                    {torrent.comments}
                                 </span>
                             </p>
                         )}
@@ -104,19 +109,19 @@ export const TorrentItem = (props: TorrentItemProps) => {
 
                     {/* Tags */}
                     <p className="flex gap-1 text-muted-foreground line-clamp-2 text-sm leading-normal font-normal">
-                        {props.userTag && (
-                            <ColorBadge color={'sky'} href={'#'} className={`torrent-item-user-tag`}>
-                                {props.userTag}
+                        {torrent.userTag && (
+                            <ColorBadge color={'sky'} href={'#'} className={`torrent-item-user-tag rounded`}>
+                                {torrent.userTag}
                             </ColorBadge>
                         )}
-                        {props.tags && (
-                            props.tags.map((tag, index) => (
-                                <NeutralBadge key={index} href={'#'} className={`torrent-item-tag`}>
+                        {torrent.tags && (
+                            torrent.tags.map((tag, index) => (
+                                <NeutralBadge key={index} href={'#'} className={`torrent-item-tag rounded`}>
                                     {tag}
                                 </NeutralBadge>
                             ))
                         )}
-                        {!props.tags && !props.userTag && (
+                        {!torrent.tags && !torrent.userTag && (
                             <span className={`badge-secondary border border-neutral-600 bg-neutral-800`}>
                                 No Tags
                             </span>
@@ -129,8 +134,8 @@ export const TorrentItem = (props: TorrentItemProps) => {
             <TorrentItemButton
                 className={`torrent-item-queue-btn`}
                 color="sky"
-                disabled={!props.downloadLink}
-                tooltip={props.downloadLink ? `Add to Download Queue` : `Torrent Unavailable`}
+                disabled={!torrent.downloadLink}
+                tooltip={torrent.downloadLink ? `Add to Download Queue` : `Torrent Unavailable`}
             >
                 <CirclePlusIcon size={4} className="mr-1 mt-px" strokeWidth={2} />
                 Queue
@@ -147,9 +152,9 @@ export const TorrentItem = (props: TorrentItemProps) => {
             {/* Directly Download Button */}
             <TorrentItemButton
                 className={`torrent-item-download-btn`}
-                disabled={!props.downloadLink}
-                tooltip={props.downloadLink ? `Download Torrent File` : `Torrent Unavailable`}
-                data-download-link={props.downloadLink}
+                disabled={!torrent.downloadLink}
+                tooltip={torrent.downloadLink ? `Download Torrent File` : `Torrent Unavailable`}
+                data-download-link={torrent.downloadLink}
             >
                 <DownloadIcon size={4} strokeWidth={2.5} />
             </TorrentItemButton>
@@ -157,9 +162,9 @@ export const TorrentItem = (props: TorrentItemProps) => {
             {/* Copy Torrent Link Button */}
             <TorrentItemButton
                 className={`torrent-item-copy-download-btn`}
-                disabled={!props.downloadLink}
-                tooltip={props.downloadLink ? `Copy Download Link` : `Download Link Unavailable`}
-                data-download-link={props.downloadLink}
+                disabled={!torrent.downloadLink}
+                tooltip={torrent.downloadLink ? `Copy Download Link` : `Download Link Unavailable`}
+                data-download-link={torrent.downloadLink}
             >
                 <ChainIcon size={3}/>
             </TorrentItemButton>
@@ -167,9 +172,9 @@ export const TorrentItem = (props: TorrentItemProps) => {
             {/* Copy Magnet Link Button */}
             <TorrentItemButton
                 className={`torrent-item-copy-magnet-btn`}
-                disabled={!props.magnetLink}
-                tooltip={props.magnetLink ? `Copy Magnet Link` : `Magnet Link Unavailable`}
-                data-magnet-link={props.magnetLink}
+                disabled={!torrent.magnetLink}
+                tooltip={torrent.magnetLink ? `Copy Magnet Link` : `Magnet Link Unavailable`}
+                data-magnet-link={torrent.magnetLink}
             >
                 <MagnetIcon size={3} strokeWidth={1.5}/>
             </TorrentItemButton>

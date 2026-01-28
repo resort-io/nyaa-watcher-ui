@@ -6,10 +6,9 @@ export const subscriptionsRoute: FastifyPluginCallback = (fastify, _opts) => {
         res.setTitle("Subscriptions - Nyaa Watcher");
 
         return res.send(<>
-            <PageHeader
-                title='Subscriptions'
-                subtitle='Manage your torrent subscriptions here.'
-            />
+            <PageHeader>
+                Subscriptions
+            </PageHeader>
         </>);
     });
 }
